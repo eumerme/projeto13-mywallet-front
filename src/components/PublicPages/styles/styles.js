@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 		border: none;
 		border-radius: 5px;
 		outline: none;
-		padding: 0 10px;
+		padding: 0 15px;
 		margin-bottom: 13px;
 	}
 
@@ -57,4 +57,4 @@ const Wrapper = styled.div`
 	}
 `;
 
-export default Wrapper;
+export { Wrapper };

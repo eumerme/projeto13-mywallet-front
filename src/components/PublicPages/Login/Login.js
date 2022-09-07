@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Wrapper from '../styles/styles';
+import { Wrapper } from '../styles/styles';
 
 export default function Login() {
 	const [formData, setFromDara] = useState({
@@ -18,6 +18,7 @@ export default function Login() {
 	const handleForm = (e) => {
 		e.preventDefault();
 		const body = { ...formData };
+		console.log(body);
 		// promise
 	};
 
@@ -34,7 +35,7 @@ export default function Login() {
 					onChange={handleInputs}
 				/>
 				<input
-					type='text'
+					type='password'
 					placeholder='Senha'
 					required
 					value={formData.password}

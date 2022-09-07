@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Wrapper from '../styles/styles';
+import { Link, useNavigate } from 'react-router-dom';
+import { Wrapper } from '../styles/styles';
+import { signup } from '../../../services/myWallet';
 
 export default function Signup() {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -20,7 +22,15 @@ export default function Signup() {
 	const handleForm = (e) => {
 		e.preventDefault();
 		const body = { ...formData };
-		// const promise
+
+		signup(body)
+			.then((res) => {
+				alert('Cadastro realizado com sucesso!');
+				navigate('/');
+			})
+			.catch((error) => {
+				alert(error.response.data.message);
+			});
 	};
 
 	return (
@@ -44,7 +54,7 @@ export default function Signup() {
 					onChange={handleInputs}
 				/>
 				<input
-					type='text'
+					type='password'
 					placeholder='Senha'
 					required
 					value={formData.password}
@@ -52,7 +62,7 @@ export default function Signup() {
 					onChange={handleInputs}
 				/>
 				<input
-					type='text'
+					type='password'
 					placeholder='Confirme a senha'
 					required
 					value={formData.confirmPassword}

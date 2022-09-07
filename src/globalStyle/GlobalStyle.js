@@ -56,8 +56,8 @@ table {
     box-sizing: border-box;
 }
 a {
-  color: inherit;
-  text-decoration: inherit;
+	color: inherit;
+	text-decoration: inherit;
 }
 `;
 
