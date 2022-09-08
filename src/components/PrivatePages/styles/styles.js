@@ -6,7 +6,7 @@ const Wrapper = styled.div`
 	padding: 0 24px;
 	display: flex;
 	flex-direction: column;
-	justify-content: ${(props) => (props.registry ? 'flex-start' : 'center')};
+	justify-content: ${(props) => (props.registration ? 'flex-start' : 'center')};
 	align-items: center;
 `;
 

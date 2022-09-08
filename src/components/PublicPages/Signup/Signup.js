@@ -23,14 +23,15 @@ export default function Signup() {
 		e.preventDefault();
 		const body = { ...formData };
 
-		signup(body)
-			.then((res) => {
-				alert('Cadastro realizado com sucesso!');
-				navigate('/');
-			})
-			.catch((error) => {
-				alert(error.response.data.message);
-			});
+		const promise = signup(body);
+		promise.then((res) => {
+			alert('Cadastro realizado com sucesso!');
+			navigate('/');
+		});
+		promise.catch((error) => {
+			console.log(error);
+			alert(error.response.data.message);
+		});
 	};
 
 	return (

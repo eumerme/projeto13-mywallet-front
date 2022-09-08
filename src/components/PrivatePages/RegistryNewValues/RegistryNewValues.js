@@ -1,8 +1,9 @@
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Top, Form, Wrapper } from '../styles/styles';
 
-export default function Registration() {
+export default function RegistryNewValues() {
 	const { state } = useLocation();
 
 	const [formData, setFromDara] = useState({
@@ -20,12 +21,12 @@ export default function Registration() {
 	const handleForm = (e) => {
 		e.preventDefault();
 		const type = state;
-		const body = { ...formData, type };
+		const body = { ...formData, type, date: dayjs().format('DD/MM') };
 		console.log(body);
 		// promise
 	};
 	return (
-		<Wrapper registry>
+		<Wrapper registration>
 			<Top>
 				<h1>{state === 'income' ? 'Nova entrada' : 'Nova saída'}</h1>
 			</Top>

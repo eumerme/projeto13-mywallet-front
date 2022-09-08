@@ -16,13 +16,13 @@ function createHeaders() {
 }
 
 function signup(body) {
-	const promise = axios.post(`${urlBase}/auth/signup`, body);
+	const promise = axios.post(`${urlBase}/signup`, body);
 	return promise;
 }
 
 function login(body) {
 	const config = createHeaders();
-	const promise = axios.post(`${urlBase}/auth/login`, body, config);
+	const promise = axios.post(`${urlBase}/login`, body, config);
 	return promise;
 }
 

@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../../services/myWallet';
 import { Wrapper } from '../styles/styles';
 
 export default function Login() {
+	const navigate = useNavigate();
 	const [formData, setFromDara] = useState({
 		email: '',
 		password: '',
@@ -11,15 +13,28 @@ export default function Login() {
 	const handleInputs = (e) => {
 		setFromDara({
 			...formData,
-			[e.target.name]: [e.target.value],
+			[e.target.name]: e.target.value,
 		});
 	};
 
 	const handleForm = (e) => {
 		e.preventDefault();
 		const body = { ...formData };
-		console.log(body);
-		// promise
+
+		const promise = login(body);
+		promise.then((res) => {
+			localStorage.setItem(
+				'trackit',
+				JSON.stringify({
+					name: res.data.name,
+					token: res.data.token,
+				})
+			);
+			navigate('/home');
+		});
+		promise.catch((error) => {
+			alert(error.response.data.message);
+		});
 	};
 
 	return (
