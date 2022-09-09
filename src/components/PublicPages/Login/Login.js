@@ -22,19 +22,20 @@ export default function Login() {
 		const body = { ...formData };
 
 		const promise = login(body);
-		promise.then((res) => {
-			localStorage.setItem(
-				'trackit',
-				JSON.stringify({
-					name: res.data.name,
-					token: res.data.token,
-				})
-			);
-			navigate('/home');
-		});
-		promise.catch((error) => {
-			alert(error.response.data.message);
-		});
+		promise
+			.then((res) => {
+				localStorage.setItem(
+					'mywallet',
+					JSON.stringify({
+						name: res.data.name,
+						token: res.data.token,
+					})
+				);
+				navigate('/home');
+			})
+			.catch((error) => {
+				alert(error.response.data.message);
+			});
 	};
 
 	return (

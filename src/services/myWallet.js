@@ -5,7 +5,7 @@ const urlBase = 'http://localhost:5000';
 function createHeaders() {
 	const auth = JSON.parse(localStorage.getItem('mywallet'));
 
-	if (auth !== null) {
+	if (auth) {
 		const config = {
 			headers: {
 				Authorization: `Bearer ${auth.token}`,
@@ -26,4 +26,20 @@ function login(body) {
 	return promise;
 }
 
-export { signup, login };
+function getTransactions() {
+	const config = createHeaders();
+	const promise = axios.get(`${urlBase}/transactions`, config);
+	return promise;
+	/* 
+	try {
+		const { data } = await axios.get(`${urlBase}/transactions`, config);
+		//promise = data;
+		console.log(data);
+		return data;
+	} catch (error) {
+		console.error(error.message);
+		return;
+	} */
+}
+
+export { signup, login, getTransactions };

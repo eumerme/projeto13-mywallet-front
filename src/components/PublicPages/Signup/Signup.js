@@ -24,14 +24,15 @@ export default function Signup() {
 		const body = { ...formData };
 
 		const promise = signup(body);
-		promise.then((res) => {
-			alert('Cadastro realizado com sucesso!');
-			navigate('/');
-		});
-		promise.catch((error) => {
-			console.log(error);
-			alert(error.response.data.message);
-		});
+		promise
+			.then((res) => {
+				alert('Cadastro realizado com sucesso!');
+				navigate('/');
+			})
+			.catch((error) => {
+				console.log(error);
+				alert(error.response.data.message);
+			});
 	};
 
 	return (

@@ -3,7 +3,7 @@ import GlobalStyle from '../globalStyle/GlobalStyle';
 import Login from './PublicPages/Login/Login';
 import Signup from './PublicPages/Signup/Signup';
 import Home from './PrivatePages/Home/Home';
-import RegistryNewValues from './PrivatePages/RegistryNewValues/RegistryNewValues';
+import NewTransaction from './PrivatePages/NewTransaction/NewTransaction';
 import Private from './PrivatePages/Private';
 
 export default function App() {
@@ -23,10 +23,10 @@ export default function App() {
 						}
 					/>
 					<Route
-						path='/registration'
+						path='/transaction'
 						element={
 							<Private>
-								<RegistryNewValues />
+								<NewTransaction />
 							</Private>
 						}
 					/>

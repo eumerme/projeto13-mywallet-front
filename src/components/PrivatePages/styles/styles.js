@@ -6,7 +6,7 @@ const Wrapper = styled.div`
 	padding: 0 24px;
 	display: flex;
 	flex-direction: column;
-	justify-content: ${(props) => (props.registration ? 'flex-start' : 'center')};
+	justify-content: ${(props) => (props.transaction ? 'flex-start' : 'center')};
 	align-items: center;
 `;
 
@@ -28,9 +28,11 @@ const Main = styled.div`
 	width: 100%;
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	border-radius: 5px;
+	padding: 10px;
 	background-color: #ffffff;
 
 	h2 {
@@ -40,6 +42,70 @@ const Main = styled.div`
 		font-size: 20px;
 		color: #868686;
 	}
+`;
+
+const BankStatement = styled.div`
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+
+	div {
+		width: 100%;
+		height: 30px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	h2 {
+		width: auto;
+		height: auto;
+		font-size: 16px;
+		padding: 2px;
+		color: #c6c6c6;
+	}
+
+	h3 {
+		width: 100%;
+		height: auto;
+		font-size: 16px;
+		padding: 2px;
+		margin-left: 5px;
+		color: #000000;
+	}
+`;
+
+const Value = styled.h4`
+	width: auto;
+	height: auto;
+	font-size: 16px;
+	padding: 2px;
+	color: ${(props) => (props.credit ? '#03AC00' : '#C70000')};
+`;
+
+const BankBalance = styled.div`
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 5px;
+
+	h2 {
+		width: auto;
+		height: auto;
+		font-size: 17px;
+		font-weight: 700;
+		padding: 2px;
+		color: #000000;
+	}
+`;
+
+const BBalance = styled.h3`
+	width: auto;
+	height: auto;
+	font-size: 17px;
+	padding: 2px;
+	color: ${(props) => (props.total > 0 ? '#03AC00' : '#C70000')};
 `;
 
 const Footer = styled.div`
@@ -108,4 +174,15 @@ const Form = styled.form`
 	}
 `;
 
-export { Wrapper, Top, Main, Footer, Registry, Form };
+export {
+	Wrapper,
+	Top,
+	Main,
+	Footer,
+	Registry,
+	Form,
+	BankStatement,
+	BankBalance,
+	Value,
+	BBalance,
+};

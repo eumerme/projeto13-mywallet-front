@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Top, Form, Wrapper } from '../styles/styles';
 
-export default function RegistryNewValues() {
+export default function NewTransaction() {
 	const { state } = useLocation();
 
 	const [formData, setFromDara] = useState({
@@ -26,9 +26,9 @@ export default function RegistryNewValues() {
 		// promise
 	};
 	return (
-		<Wrapper registration>
+		<Wrapper transaction>
 			<Top>
-				<h1>{state === 'income' ? 'Nova entrada' : 'Nova saída'}</h1>
+				<h1>{state === 'credit' ? 'Nova entrada' : 'Nova saída'}</h1>
 			</Top>
 			<Form onSubmit={handleForm}>
 				<input
@@ -48,7 +48,7 @@ export default function RegistryNewValues() {
 					onChange={handleInputs}
 				/>
 				<button type='submit'>
-					{state === 'income' ? 'Salvar entrada' : 'Salvar saída'}
+					{state === 'credit' ? 'Salvar entrada' : 'Salvar saída'}
 				</button>
 			</Form>
 		</Wrapper>
