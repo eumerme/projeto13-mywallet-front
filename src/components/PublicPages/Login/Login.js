@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/myWallet';
 import { Wrapper } from '../styles/styles';
 
 export default function Login() {
 	const navigate = useNavigate();
+	const auth = JSON.parse(localStorage.getItem('mywallet'));
 	const [formData, setFromDara] = useState({
 		email: '',
 		password: '',
@@ -39,30 +40,36 @@ export default function Login() {
 	};
 
 	return (
-		<Wrapper>
-			<h1>MyWallet</h1>
-			<form onSubmit={handleForm}>
-				<input
-					type='email'
-					placeholder='Email'
-					required
-					value={formData.email}
-					name='email'
-					onChange={handleInputs}
-				/>
-				<input
-					type='password'
-					placeholder='Senha'
-					required
-					value={formData.password}
-					name='password'
-					onChange={handleInputs}
-				/>
-				<button type='submit'>Entrar</button>
-			</form>
-			<Link to='/signup'>
-				<div>Primeira vez? Cadastre-se!</div>
-			</Link>
-		</Wrapper>
+		<>
+			{auth ? (
+				<Navigate to='/home' />
+			) : (
+				<Wrapper>
+					<h1>MyWallet</h1>
+					<form onSubmit={handleForm}>
+						<input
+							type='email'
+							placeholder='Email'
+							required
+							value={formData.email}
+							name='email'
+							onChange={handleInputs}
+						/>
+						<input
+							type='password'
+							placeholder='Senha'
+							required
+							value={formData.password}
+							name='password'
+							onChange={handleInputs}
+						/>
+						<button type='submit'>Entrar</button>
+					</form>
+					<Link to='/signup'>
+						<div>Primeira vez? Cadastre-se!</div>
+					</Link>
+				</Wrapper>
+			)}
+		</>
 	);
 }

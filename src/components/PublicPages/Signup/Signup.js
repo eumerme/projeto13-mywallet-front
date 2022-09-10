@@ -26,7 +26,7 @@ export default function Signup() {
 		const promise = signup(body);
 		promise
 			.then((res) => {
-				alert('Cadastro realizado com sucesso!');
+				alert(res.data.message);
 				navigate('/');
 			})
 			.catch((error) => {

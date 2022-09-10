@@ -26,20 +26,22 @@ function login(body) {
 	return promise;
 }
 
-function getTransactions() {
+function getTransactions(token) {
 	const config = createHeaders();
 	const promise = axios.get(`${urlBase}/transactions`, config);
 	return promise;
-	/* 
-	try {
-		const { data } = await axios.get(`${urlBase}/transactions`, config);
-		//promise = data;
-		console.log(data);
-		return data;
-	} catch (error) {
-		console.error(error.message);
-		return;
-	} */
 }
 
-export { signup, login, getTransactions };
+function createTransactions(body) {
+	const config = createHeaders();
+	const promise = axios.post(`${urlBase}/transactions`, body, config);
+	return promise;
+}
+
+function logout() {
+	const config = createHeaders();
+	const promise = axios.post(`${urlBase}/logout`, {}, config);
+	return promise;
+}
+
+export { signup, login, getTransactions, createTransactions, logout };

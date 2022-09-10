@@ -6,13 +6,15 @@ const Wrapper = styled.div`
 	padding: 0 24px;
 	display: flex;
 	flex-direction: column;
-	justify-content: ${(props) => (props.transaction ? 'flex-start' : 'center')};
+	justify-content: ${(props) =>
+		props.transaction ? 'flex-start' : 'space-between'};
 	align-items: center;
 `;
 
 const Top = styled.div`
 	width: 100%;
-	height: 100px;
+	min-height: 10%;
+	max-height: 20%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -22,11 +24,19 @@ const Top = styled.div`
 		font-weight: 700;
 		color: #ffffff;
 	}
+
+	div {
+		width: auto;
+		height: auto;
+		font-size: 30px;
+		color: #ffffff;
+	}
 `;
 
 const Main = styled.div`
 	width: 100%;
-	height: 100vh;
+	min-height: 69%;
+	max-height: 50%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -34,6 +44,7 @@ const Main = styled.div`
 	border-radius: 5px;
 	padding: 10px;
 	background-color: #ffffff;
+	position: relative;
 
 	h2 {
 		width: 180px;
@@ -48,6 +59,7 @@ const BankStatement = styled.div`
 	width: 100%;
 	height: 100%;
 	border-radius: 5px;
+	overflow-y: scroll;
 
 	div {
 		width: 100%;
@@ -85,10 +97,17 @@ const Value = styled.h4`
 
 const BankBalance = styled.div`
 	width: 100%;
-	height: auto;
+	height: 47px;
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
+	padding: 10px;
 	border-radius: 5px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: #ffffff;
+	z-index: 1;
 
 	h2 {
 		width: auto;
@@ -110,7 +129,8 @@ const BBalance = styled.h3`
 
 const Footer = styled.div`
 	width: 100%;
-	height: 180px;
+	min-height: 21%;
+	max-height: 30%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

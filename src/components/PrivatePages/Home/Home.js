@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTransactions } from '../../../services/myWallet';
+import { getTransactions, logout } from '../../../services/myWallet';
+import { BiExit } from 'react-icons/bi';
 import {
 	Wrapper,
 	Top,
@@ -12,6 +13,30 @@ import {
 	Value,
 	BBalance,
 } from '../styles/styles';
+
+function userLogout() {
+	const promise = logout();
+	promise
+		.then((res) => {
+			localStorage.clear('mywallet');
+			window.location.reload();
+		})
+		.catch((error) => alert(error.response.data.message));
+}
+
+function Transactions({ transaction }) {
+	return (
+		<div>
+			<h2>{transaction.date}</h2>
+			<h3>{transaction.description}</h3>
+			{transaction.type === 'credit' ? (
+				<Value credit>{(transaction.value / 100).toFixed(2)}</Value>
+			) : (
+				<Value>{((Number(transaction.value) * -1) / 100).toFixed(2)}</Value>
+			)}
+		</div>
+	);
+}
 
 export default function Home() {
 	const navigate = useNavigate();
@@ -46,7 +71,13 @@ export default function Home() {
 		<Wrapper>
 			<Top>
 				<h1>{`Olá, ${name}`}</h1>
-				<div>icon</div>
+				<div>
+					<BiExit
+						onClick={() => {
+							userLogout();
+						}}
+					/>
+				</div>
 			</Top>
 			<Main>
 				{transactions.length === 0 ? (
@@ -54,21 +85,13 @@ export default function Home() {
 				) : (
 					<>
 						<BankStatement>
-							{transactions.map((transaction) => (
-								<div>
-									<h2>{transaction.date}</h2>
-									<h3>{transaction.description}</h3>
-									{transaction.type === 'credit' ? (
-										<Value credit>{transaction.value}</Value>
-									) : (
-										<Value>{Number(transaction.value) * -1}</Value>
-									)}
-								</div>
+							{transactions.map((transaction, index) => (
+								<Transactions key={index} transaction={transaction} />
 							))}
 						</BankStatement>
 						<BankBalance>
 							<h2>{'SALDO'}</h2>
-							<BBalance total={total}>{total}</BBalance>
+							<BBalance total={total}>{(total / 100).toFixed(2)}</BBalance>
 						</BankBalance>
 					</>
 				)}
