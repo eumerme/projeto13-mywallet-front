@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/myWallet';
-import { Wrapper, LoaderSpinner } from '../styles/styles';
+import { Wrapper } from '../styles/styles';
 import { ThreeDots } from 'react-loader-spinner';
+import { Form } from '../styles/styles.js';
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function Login() {
 			) : (
 				<Wrapper>
 					<h1>MyWallet</h1>
-					<form onSubmit={handleForm}>
+					<Form onSubmit={handleForm}>
 						<input
 							type='email'
 							placeholder='Email'
@@ -70,16 +71,14 @@ export default function Login() {
 							onChange={handleInputs}
 							disabled={disable}
 						/>
-						{!disable ? (
-							<button type='submit' disabled={disable}>
-								Entrar
-							</button>
-						) : (
-							<LoaderSpinner>
+						<button type='submit' disabled={disable}>
+							{!disable ? (
+								'Entrar'
+							) : (
 								<ThreeDots color='#ffffff' height={13} width={51} />
-							</LoaderSpinner>
-						)}
-					</form>
+							)}
+						</button>
+					</Form>
 					<Link to='/signup'>
 						<p>Primeira vez? Cadastre-se!</p>
 					</Link>

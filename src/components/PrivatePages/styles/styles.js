@@ -28,7 +28,7 @@ const Top = styled.div`
 	div {
 		width: auto;
 		height: auto;
-		font-size: 30px;
+		font-size: ${(props) => (props.transaction ? '20px' : '30px')};
 		color: #ffffff;
 	}
 `;
@@ -94,6 +94,7 @@ const Value = styled.h4`
 	height: auto;
 	font-size: 16px;
 	padding: 2px;
+	margin-right: 8px;
 	color: ${(props) => (props.credit ? '#03AC00' : '#C70000')};
 `;
 
@@ -168,48 +169,12 @@ const Icons = styled.div`
 	color: #ffffff;
 `;
 
-const Form = styled.form`
-	width: 100%;
-	height: auto;
-	display: flex;
-	flex-direction: column;
-	margin-top: 10px;
-
-	input {
-		width: 100%;
-		height: 58px;
-		font-size: 20px;
-		border: none;
-		border-radius: 5px;
-		outline: none;
-		padding: 0 15px;
-		margin-bottom: 13px;
-	}
-
-	input::placeholder {
-		font-size: 20px;
-		color: #000000;
-	}
-
-	button {
-		width: 100%;
-		height: 46px;
-		font-size: 20px;
-		font-weight: 700;
-		color: #ffffff;
-		border: none;
-		border-radius: 5px;
-		background-color: #a328d6;
-	}
-`;
-
 export {
 	Wrapper,
 	Top,
 	Main,
 	Footer,
 	Registry,
-	Form,
 	BankStatement,
 	BankBalance,
 	Value,

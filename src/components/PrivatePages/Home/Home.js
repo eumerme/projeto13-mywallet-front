@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTransactions, logout } from '../../../services/myWallet';
+import { getTransactions } from '../../../services/myWallet';
 import { BiExit, BiMinusCircle, BiPlusCircle } from 'react-icons/bi';
 import { ThreeDots } from 'react-loader-spinner';
+import userLogout from '../UserLogout/UserLogout.js';
+import Transactions from './Transactions.js';
 import {
 	Wrapper,
 	Top,
@@ -11,47 +13,16 @@ import {
 	Registry,
 	BankStatement,
 	BankBalance,
-	Value,
 	BBalance,
 	Icons,
 } from '../styles/styles';
-
-function userLogout() {
-	const promise = logout();
-	promise
-		.then((res) => {
-			localStorage.clear('mywallet');
-			window.location.reload();
-		})
-		.catch((error) => console.error(error));
-}
-
-function Transactions({ transaction }) {
-	const valueFormated = (transaction.value / 100)
-		.toLocaleString('pt-br', {
-			style: 'currency',
-			currency: 'BRL',
-		})
-		.substring(3);
-
-	return (
-		<div>
-			<h2>{transaction.date}</h2>
-			<h3>{transaction.description}</h3>
-			{transaction.type === 'credit' ? (
-				<Value credit>{valueFormated}</Value>
-			) : (
-				<Value>{valueFormated}</Value>
-			)}
-		</div>
-	);
-}
 
 export default function Home() {
 	const navigate = useNavigate();
 	const { name, email } = JSON.parse(localStorage.getItem('mywallet'));
 	const [transactions, setTransactions] = useState([]);
 	const [update, setUpdate] = useState(null);
+	const [reload, setReload] = useState(false);
 	const [total, setTotal] = useState(0);
 	const [renderBBalance, setRenderBBalance] = useState('');
 
@@ -83,7 +54,7 @@ export default function Home() {
 			setRenderBBalance(_bankbalanceFormated);
 			setTotal(_bankbalance);
 		}
-	}, [transactions.length]);
+	}, [transactions.length, reload]);
 
 	return (
 		<Wrapper>
@@ -108,7 +79,12 @@ export default function Home() {
 							<>
 								<BankStatement>
 									{transactions.map((transaction, index) => (
-										<Transactions key={index} transaction={transaction} />
+										<Transactions
+											key={index}
+											transaction={transaction}
+											setReload={setReload}
+											reload={reload}
+										/>
 									))}
 								</BankStatement>
 								<BankBalance>

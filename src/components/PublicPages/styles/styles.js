@@ -13,14 +13,23 @@ const Wrapper = styled.div`
 		font-family: 'Saira Stencil One', cursive;
 		font-size: 32px;
 		color: #ffffff;
-		margin-bottom: 28px;
+		margin-bottom: 18px;
 	}
 
-	form {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
+	p {
+		font-size: 15px;
+		font-weight: 700;
+		color: #ffffff;
+		margin-top: 32px;
 	}
+`;
+
+const Form = styled.form`
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
 
 	input {
 		width: 100%;
@@ -47,24 +56,10 @@ const Wrapper = styled.div`
 		border: none;
 		border-radius: 5px;
 		background-color: #a328d6;
-	}
-
-	p {
-		font-size: 15px;
-		font-weight: 700;
-		color: #ffffff;
-		margin-top: 32px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 `;
 
-const LoaderSpinner = styled.div`
-	width: 100%;
-	height: 46px;
-	background-color: #a328d6;
-	border-radius: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
-export { Wrapper, LoaderSpinner };
+export { Wrapper, Form };

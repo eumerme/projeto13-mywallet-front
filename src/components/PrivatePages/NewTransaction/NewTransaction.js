@@ -2,9 +2,10 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createTransaction } from '../../../services/myWallet';
-import { Top, Form, Wrapper } from '../styles/styles';
-import { LoaderSpinner } from '../../PublicPages/styles/styles';
+import { Top, Wrapper } from '../styles/styles';
+import { Form } from '../../PublicPages/styles/styles';
 import { ThreeDots } from 'react-loader-spinner';
+import { MdArrowBackIos } from 'react-icons/md';
 
 export default function NewTransaction() {
 	const { state } = useLocation();
@@ -51,7 +52,14 @@ export default function NewTransaction() {
 
 	return (
 		<Wrapper transaction>
-			<Top>
+			<Top transaction>
+				<div>
+					<MdArrowBackIos
+						onClick={() => {
+							navigate('/home');
+						}}
+					/>
+				</div>
 				<h1>{state.type === 'credit' ? 'Nova entrada' : 'Nova saída'}</h1>
 			</Top>
 			<Form onSubmit={handleForm}>
@@ -75,15 +83,13 @@ export default function NewTransaction() {
 					onChange={handleInputs}
 					disabled={disable}
 				/>
-				{!disable ? (
-					<button type='submit'>
-						{state.type === 'credit' ? 'Salvar entrada' : 'Salvar saída'}
-					</button>
-				) : (
-					<LoaderSpinner>
+				<button type='submit' disabled={disable}>
+					{!disable ? (
+						<>{state.type === 'credit' ? 'Salvar entrada' : 'Salvar saída'}</>
+					) : (
 						<ThreeDots color='#ffffff' height={13} width={51} />
-					</LoaderSpinner>
-				)}
+					)}
+				</button>
 			</Form>
 		</Wrapper>
 	);

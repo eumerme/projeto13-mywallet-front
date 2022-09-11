@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Wrapper, LoaderSpinner } from '../styles/styles';
+import { Form, Wrapper } from '../styles/styles';
 import { signup } from '../../../services/myWallet';
 import { ThreeDots } from 'react-loader-spinner';
 
@@ -42,7 +42,7 @@ export default function Signup() {
 	return (
 		<Wrapper>
 			<h1>MyWallet</h1>
-			<form onSubmit={handleForm}>
+			<Form onSubmit={handleForm}>
 				<input
 					type='text'
 					placeholder='Nome'
@@ -79,16 +79,14 @@ export default function Signup() {
 					onChange={handleInputs}
 					disabled={disable}
 				/>
-				{!disable ? (
-					<button type='submit' disabled={disable}>
-						Cadastrar
-					</button>
-				) : (
-					<LoaderSpinner>
+				<button type='submit' disabled={disable}>
+					{!disable ? (
+						'Cadastrar'
+					) : (
 						<ThreeDots color='#ffffff' height={13} width={51} />
-					</LoaderSpinner>
-				)}
-			</form>
+					)}
+				</button>
+			</Form>
 			<Link to='/'>
 				<p>Já tem uma conta? Entre agora!</p>
 			</Link>

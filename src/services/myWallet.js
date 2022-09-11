@@ -38,10 +38,27 @@ function createTransaction(body) {
 	return promise;
 }
 
+function deleteTransaction(transactionId) {
+	const config = {
+		headers: {
+			User: transactionId,
+		},
+	};
+	const promise = axios.delete(`${urlBase}/transactions`, config);
+	return promise;
+}
+
 function logout() {
 	const config = createHeaders();
 	const promise = axios.post(`${urlBase}/logout`, {}, config);
 	return promise;
 }
 
-export { signup, login, getTransactions, createTransaction, logout };
+export {
+	signup,
+	login,
+	getTransactions,
+	createTransaction,
+	deleteTransaction,
+	logout,
+};
