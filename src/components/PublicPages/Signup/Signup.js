@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Wrapper } from '../styles/styles';
+import { Wrapper, LoaderSpinner } from '../styles/styles';
 import { signup } from '../../../services/myWallet';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function Signup() {
 	const navigate = useNavigate();
+	const [disable, setDisable] = useState(false);
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -21,6 +23,7 @@ export default function Signup() {
 
 	const handleForm = (e) => {
 		e.preventDefault();
+		setDisable(true);
 		const body = { ...formData };
 
 		const promise = signup(body);
@@ -30,6 +33,7 @@ export default function Signup() {
 				navigate('/');
 			})
 			.catch((error) => {
+				setDisable(false);
 				console.log(error);
 				alert(error.response.data.message);
 			});
@@ -46,6 +50,7 @@ export default function Signup() {
 					value={formData.name}
 					name='name'
 					onChange={handleInputs}
+					disabled={disable}
 				/>
 				<input
 					type='email'
@@ -54,6 +59,7 @@ export default function Signup() {
 					value={formData.email}
 					name='email'
 					onChange={handleInputs}
+					disabled={disable}
 				/>
 				<input
 					type='password'
@@ -62,6 +68,7 @@ export default function Signup() {
 					value={formData.password}
 					name='password'
 					onChange={handleInputs}
+					disabled={disable}
 				/>
 				<input
 					type='password'
@@ -70,11 +77,20 @@ export default function Signup() {
 					value={formData.confirmPassword}
 					name='confirmPassword'
 					onChange={handleInputs}
+					disabled={disable}
 				/>
-				<button type='submit'>Cadastrar</button>
+				{!disable ? (
+					<button type='submit' disabled={disable}>
+						Cadastrar
+					</button>
+				) : (
+					<LoaderSpinner>
+						<ThreeDots color='#ffffff' height={13} width={51} />
+					</LoaderSpinner>
+				)}
 			</form>
 			<Link to='/'>
-				<div>Já tem uma conta? Entre agora!</div>
+				<p>Já tem uma conta? Entre agora!</p>
 			</Link>
 		</Wrapper>
 	);

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTransactions, logout } from '../../../services/myWallet';
-import { BiExit } from 'react-icons/bi';
+import { BiExit, BiMinusCircle, BiPlusCircle } from 'react-icons/bi';
+import { ThreeDots } from 'react-loader-spinner';
 import {
 	Wrapper,
 	Top,
@@ -12,6 +13,7 @@ import {
 	BankBalance,
 	Value,
 	BBalance,
+	Icons,
 } from '../styles/styles';
 
 function userLogout() {
@@ -21,18 +23,25 @@ function userLogout() {
 			localStorage.clear('mywallet');
 			window.location.reload();
 		})
-		.catch((error) => alert(error.response.data.message));
+		.catch((error) => console.error(error));
 }
 
 function Transactions({ transaction }) {
+	const valueFormated = (transaction.value / 100)
+		.toLocaleString('pt-br', {
+			style: 'currency',
+			currency: 'BRL',
+		})
+		.substring(3);
+
 	return (
 		<div>
 			<h2>{transaction.date}</h2>
 			<h3>{transaction.description}</h3>
 			{transaction.type === 'credit' ? (
-				<Value credit>{(transaction.value / 100).toFixed(2)}</Value>
+				<Value credit>{valueFormated}</Value>
 			) : (
-				<Value>{((Number(transaction.value) * -1) / 100).toFixed(2)}</Value>
+				<Value>{valueFormated}</Value>
 			)}
 		</div>
 	);
@@ -40,15 +49,20 @@ function Transactions({ transaction }) {
 
 export default function Home() {
 	const navigate = useNavigate();
-	const { name } = JSON.parse(localStorage.getItem('mywallet'));
+	const { name, email } = JSON.parse(localStorage.getItem('mywallet'));
 	const [transactions, setTransactions] = useState([]);
+	const [update, setUpdate] = useState(null);
 	const [total, setTotal] = useState(0);
+	const [renderBBalance, setRenderBBalance] = useState('');
 
 	useEffect(() => {
 		const promise = getTransactions();
 		promise
-			.then((res) => setTransactions(res.data))
-			.catch((error) => alert(error.response.data.messsage));
+			.then((res) => {
+				setTransactions(res.data);
+				setUpdate('updated');
+			})
+			.catch((error) => console.error(error));
 
 		if (transactions.lenght !== 0) {
 			const _bankbalance = transactions
@@ -58,14 +72,18 @@ export default function Home() {
 						: Number(_transaction.value) * -1
 				)
 				.reduce((total, value) => total + value, 0);
+
+			const _bankbalanceFormated = (_bankbalance / 100)
+				.toLocaleString('pt-br', {
+					style: 'currency',
+					currency: 'BRL',
+				})
+				.substring(3);
+
+			setRenderBBalance(_bankbalanceFormated);
 			setTotal(_bankbalance);
 		}
 	}, [transactions.length]);
-	/* .toLocaleString('pt-br', {
-								style: 'currency',
-								currency: 'BRL',
-						  }) */
-	console.log(transactions);
 
 	return (
 		<Wrapper>
@@ -80,19 +98,25 @@ export default function Home() {
 				</div>
 			</Top>
 			<Main>
-				{transactions.length === 0 ? (
-					<h2>{'Não há registros de entrada ou saída'}</h2>
+				{!update ? (
+					<ThreeDots color='#a328d6' height={60} width={60} />
 				) : (
 					<>
-						<BankStatement>
-							{transactions.map((transaction, index) => (
-								<Transactions key={index} transaction={transaction} />
-							))}
-						</BankStatement>
-						<BankBalance>
-							<h2>{'SALDO'}</h2>
-							<BBalance total={total}>{(total / 100).toFixed(2)}</BBalance>
-						</BankBalance>
+						{transactions.length === 0 ? (
+							<h2>{'Não há registros de entrada ou saída'}</h2>
+						) : (
+							<>
+								<BankStatement>
+									{transactions.map((transaction, index) => (
+										<Transactions key={index} transaction={transaction} />
+									))}
+								</BankStatement>
+								<BankBalance>
+									<h2>{'SALDO'}</h2>
+									<BBalance total={total}>{renderBBalance}</BBalance>
+								</BankBalance>
+							</>
+						)}
 					</>
 				)}
 			</Main>
@@ -101,22 +125,26 @@ export default function Home() {
 					onClick={() => {
 						navigate('/transaction', {
 							replace: false,
-							state: 'credit',
+							state: { type: 'credit', email },
 						});
 					}}
 				>
-					<div>icon</div>
+					<Icons>
+						<BiPlusCircle />
+					</Icons>
 					<h2>{'Nova entrada'}</h2>
 				</Registry>
 				<Registry
 					onClick={() => {
 						navigate('/transaction', {
 							replace: false,
-							state: 'debit',
+							state: { type: 'debit', email },
 						});
 					}}
 				>
-					<div>icon</div>
+					<Icons>
+						<BiMinusCircle />
+					</Icons>
 					<h2>{'Nova saída'}</h2>
 				</Registry>
 			</Footer>

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/myWallet';
-import { Wrapper } from '../styles/styles';
+import { Wrapper, LoaderSpinner } from '../styles/styles';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function Login() {
 	const navigate = useNavigate();
+	const [disable, setDisable] = useState(false);
 	const auth = JSON.parse(localStorage.getItem('mywallet'));
 	const [formData, setFromDara] = useState({
 		email: '',
@@ -20,6 +22,7 @@ export default function Login() {
 
 	const handleForm = (e) => {
 		e.preventDefault();
+		setDisable(true);
 		const body = { ...formData };
 
 		const promise = login(body);
@@ -30,11 +33,13 @@ export default function Login() {
 					JSON.stringify({
 						name: res.data.name,
 						token: res.data.token,
+						email: res.data.email,
 					})
 				);
 				navigate('/home');
 			})
 			.catch((error) => {
+				setDisable(false);
 				alert(error.response.data.message);
 			});
 	};
@@ -54,6 +59,7 @@ export default function Login() {
 							value={formData.email}
 							name='email'
 							onChange={handleInputs}
+							disabled={disable}
 						/>
 						<input
 							type='password'
@@ -62,11 +68,20 @@ export default function Login() {
 							value={formData.password}
 							name='password'
 							onChange={handleInputs}
+							disabled={disable}
 						/>
-						<button type='submit'>Entrar</button>
+						{!disable ? (
+							<button type='submit' disabled={disable}>
+								Entrar
+							</button>
+						) : (
+							<LoaderSpinner>
+								<ThreeDots color='#ffffff' height={13} width={51} />
+							</LoaderSpinner>
+						)}
 					</form>
 					<Link to='/signup'>
-						<div>Primeira vez? Cadastre-se!</div>
+						<p>Primeira vez? Cadastre-se!</p>
 					</Link>
 				</Wrapper>
 			)}

@@ -49,7 +49,7 @@ const Wrapper = styled.div`
 		background-color: #a328d6;
 	}
 
-	div {
+	p {
 		font-size: 15px;
 		font-weight: 700;
 		color: #ffffff;
@@ -57,4 +57,14 @@ const Wrapper = styled.div`
 	}
 `;
 
-export { Wrapper };
+const LoaderSpinner = styled.div`
+	width: 100%;
+	height: 46px;
+	background-color: #a328d6;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export { Wrapper, LoaderSpinner };

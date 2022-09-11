@@ -42,7 +42,7 @@ const Main = styled.div`
 	justify-content: center;
 	align-items: center;
 	border-radius: 5px;
-	padding: 10px;
+	padding: 2px 10px;
 	background-color: #ffffff;
 	position: relative;
 
@@ -60,6 +60,7 @@ const BankStatement = styled.div`
 	height: 100%;
 	border-radius: 5px;
 	overflow-y: scroll;
+	margin-bottom: 47px;
 
 	div {
 		width: 100%;
@@ -67,6 +68,7 @@ const BankStatement = styled.div`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin: 5px 0;
 	}
 
 	h2 {
@@ -81,9 +83,9 @@ const BankStatement = styled.div`
 		width: 100%;
 		height: auto;
 		font-size: 16px;
-		padding: 2px;
-		margin-left: 5px;
+		padding: 0 10px;
 		color: #000000;
+		word-break: break-all;
 	}
 `;
 
@@ -159,6 +161,13 @@ const Registry = styled.div`
 	}
 `;
 
+const Icons = styled.div`
+	width: auto;
+	height: auto;
+	font-size: 25px;
+	color: #ffffff;
+`;
+
 const Form = styled.form`
 	width: 100%;
 	height: auto;
@@ -205,4 +214,5 @@ export {
 	BankBalance,
 	Value,
 	BBalance,
+	Icons,
 };

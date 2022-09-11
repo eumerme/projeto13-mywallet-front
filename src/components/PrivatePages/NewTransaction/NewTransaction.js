@@ -1,12 +1,15 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createTransactions } from '../../../services/myWallet';
+import { createTransaction } from '../../../services/myWallet';
 import { Top, Form, Wrapper } from '../styles/styles';
+import { LoaderSpinner } from '../../PublicPages/styles/styles';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function NewTransaction() {
 	const { state } = useLocation();
 	const navigate = useNavigate();
+	const [disable, setDisable] = useState(false);
 
 	const [formData, setFromDara] = useState({
 		value: '',
@@ -22,40 +25,46 @@ export default function NewTransaction() {
 
 	const handleForm = (e) => {
 		e.preventDefault();
-		/* const value = Number(formData.value.replace(',', ''));
-		console.log(Number(formData.value.replace(',', ''))); */
-		const value = Number(formData.value.replace(',', ''));
-		//const value = formatValue(formData.value);
+		setDisable(true);
+		const valueFormated = formData.value.replace(',', '').replaceAll('.', '');
+		const value = Number(valueFormated);
 
 		const body = {
+			email: state.email,
 			value,
 			description: formData.description,
-			type: state,
+			type: state.type,
 			date: dayjs().format('DD/MM'),
 		};
 
-		const promise = createTransactions(body);
+		const promise = createTransaction(body);
 		promise
 			.then((res) => {
 				alert(res.data.message);
 				navigate('/home');
 			})
-			.catch((error) => console.log(error.response.data.message));
+			.catch((error) => {
+				setDisable(false);
+				console.log(error.response.data.message);
+			});
 	};
+
 	return (
 		<Wrapper transaction>
 			<Top>
-				<h1>{state === 'credit' ? 'Nova entrada' : 'Nova saída'}</h1>
+				<h1>{state.type === 'credit' ? 'Nova entrada' : 'Nova saída'}</h1>
 			</Top>
 			<Form onSubmit={handleForm}>
 				<input
 					type='text'
+					inputMode='numeric'
+					pattern='([0-9]{1,3}\.)*?[0-9]{1,3},[0-9]{2}'
 					placeholder='Valor'
-					pattern='[0-9]?{1,3}.?[0-9]?{1,3}.?[0-9]{1,3}[,+]{1}[0-9]{2}'
 					required
 					value={formData.value}
 					name='value'
 					onChange={handleInputs}
+					disabled={disable}
 				/>
 				<input
 					type='text'
@@ -64,10 +73,17 @@ export default function NewTransaction() {
 					value={formData.description}
 					name='description'
 					onChange={handleInputs}
+					disabled={disable}
 				/>
-				<button type='submit'>
-					{state === 'credit' ? 'Salvar entrada' : 'Salvar saída'}
-				</button>
+				{!disable ? (
+					<button type='submit'>
+						{state.type === 'credit' ? 'Salvar entrada' : 'Salvar saída'}
+					</button>
+				) : (
+					<LoaderSpinner>
+						<ThreeDots color='#ffffff' height={13} width={51} />
+					</LoaderSpinner>
+				)}
 			</Form>
 		</Wrapper>
 	);

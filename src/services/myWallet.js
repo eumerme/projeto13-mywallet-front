@@ -32,7 +32,7 @@ function getTransactions(token) {
 	return promise;
 }
 
-function createTransactions(body) {
+function createTransaction(body) {
 	const config = createHeaders();
 	const promise = axios.post(`${urlBase}/transactions`, body, config);
 	return promise;
@@ -44,4 +44,4 @@ function logout() {
 	return promise;
 }
 
-export { signup, login, getTransactions, createTransactions, logout };
+export { signup, login, getTransactions, createTransaction, logout };
