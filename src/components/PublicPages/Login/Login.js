@@ -9,13 +9,13 @@ export default function Login() {
 	const navigate = useNavigate();
 	const [disable, setDisable] = useState(false);
 	const auth = JSON.parse(localStorage.getItem('mywallet'));
-	const [formData, setFromDara] = useState({
+	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
 	});
 
 	const handleInputs = (e) => {
-		setFromDara({
+		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
 		});

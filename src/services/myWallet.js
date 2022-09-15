@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const urlBase = 'http://localhost:5000';
+const urlBase = `${process.env.REACT_APP_API_BASE_URL}`;
 
 function createHeaders() {
 	const auth = JSON.parse(localStorage.getItem('mywallet'));
