@@ -2,10 +2,11 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createTransaction } from "../../../services/myWallet";
-import { Top, Wrapper } from "../styles/styles";
-import { Form } from "../../Auth/AuthStyled";
+import { Form } from "../../Auth";
 import { ThreeDots } from "react-loader-spinner";
 import { MdArrowBackIos } from "react-icons/md";
+import { Wrapper } from "../../Wrapper";
+import { H1, TopContent } from "../../Top";
 
 export default function NewTransaction() {
 	const { state } = useLocation();
@@ -52,7 +53,7 @@ export default function NewTransaction() {
 
 	return (
 		<Wrapper transaction>
-			<Top transaction>
+			<TopContent transaction>
 				<div>
 					<MdArrowBackIos
 						onClick={() => {
@@ -60,8 +61,8 @@ export default function NewTransaction() {
 						}}
 					/>
 				</div>
-				<h1>{state.type === "credit" ? "Nova entrada" : "Nova saída"}</h1>
-			</Top>
+				<H1>{state.type === "credit" ? "Nova entrada" : "Nova saída"}</H1>
+			</TopContent>
 			<Form onSubmit={handleForm}>
 				<input
 					type="text"

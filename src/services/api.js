@@ -10,7 +10,7 @@ function createHeaders() {
 	if (userData) {
 		const config = {
 			headers: {
-				userDataorization: `Bearer ${userData.token}`,
+				Authorization: `Bearer ${userData.token}`,
 			},
 		};
 		return config;
