@@ -2,11 +2,14 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Wrapper } from "../../components/PublicPages/styles/styles";
 import { ThreeDots } from "react-loader-spinner";
 import { Form } from "../../components/PublicPages/styles/styles.js";
-import { useHandleInputs, useLocalStorage, useLogin } from "../../hooks/index";
+import { useHandleInputs, useLogin } from "../../hooks/index";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export function Login() {
 	const navigate = useNavigate();
-	const [storedValue, setStoredValue] = useLocalStorage("mywallet", {});
+	const { userData, setUserData } = useContext(UserContext);
+
 	const { inputValue, handleInputs } = useHandleInputs();
 	const { login, loginLoading } = useLogin();
 
@@ -15,7 +18,7 @@ export function Login() {
 
 		try {
 			const userData = await login({ ...inputValue });
-			setStoredValue({
+			setUserData({
 				name: userData.name,
 				token: userData.token,
 				email: userData.email,
@@ -29,7 +32,7 @@ export function Login() {
 
 	return (
 		<>
-			{storedValue.token ? (
+			{userData.token ? (
 				<Navigate to="/home" />
 			) : (
 				<Wrapper>

@@ -5,12 +5,12 @@ const api = axios.create({
 });
 
 function createHeaders() {
-	const auth = JSON.parse(localStorage.getItem("mywallet"));
+	const userData = JSON.parse(localStorage.getItem("mywallet"));
 
-	if (auth) {
+	if (userData) {
 		const config = {
 			headers: {
-				Authorization: `Bearer ${auth.token}`,
+				userDataorization: `Bearer ${userData.token}`,
 			},
 		};
 		return config;

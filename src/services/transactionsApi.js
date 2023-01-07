@@ -1,20 +1,20 @@
 import { api, createHeaders } from "./api";
 
-function getTransactions(token) {
+async function getTransactions(token) {
 	const headers = createHeaders();
-	const promise = api.get("/transactions", headers);
+	const promise = await api.get("/transactions", headers);
 	return promise;
 }
 
-function createTransaction(body) {
+async function createTransaction(body) {
 	const headers = createHeaders();
-	const promise = api.post("/transactions", body, headers);
+	const promise = await api.post("/transactions", body, headers);
 	return promise;
 }
 
-function deleteTransaction(id) {
+async function deleteTransaction(id) {
 	const headers = createHeaders();
-	const promise = api.delete(`/transactions/${id}`, headers);
+	const promise = await api.delete(`/transactions/${id}`, headers);
 	return promise;
 }
 
