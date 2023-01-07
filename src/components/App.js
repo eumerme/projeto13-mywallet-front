@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import GlobalStyle from '../globalStyle/GlobalStyle';
-import Login from './PublicPages/Login/Login';
-import Signup from './PublicPages/Signup/Signup';
-import Home from './PrivatePages/Home/Home';
-import NewTransaction from './PrivatePages/NewTransaction/NewTransaction';
-import Private from './PrivatePages/Private';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GlobalStyle from "../globalStyle/GlobalStyle";
+import Signup from "./PublicPages/Signup/Signup";
+import Home from "./PrivatePages/Home/Home";
+import NewTransaction from "./PrivatePages/NewTransaction/NewTransaction";
+import Private from "./PrivatePages/Private";
+import { Login } from "../Pages/index.js";
 
 export default function App() {
 	return (
@@ -12,10 +12,10 @@ export default function App() {
 			<GlobalStyle />
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<Login />} />
-					<Route path='/signup' element={<Signup />} />
+					<Route path="/" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
 					<Route
-						path='/home'
+						path="/home"
 						element={
 							<Private>
 								<Home />
@@ -23,7 +23,7 @@ export default function App() {
 						}
 					/>
 					<Route
-						path='/transaction'
+						path="/transaction"
 						element={
 							<Private>
 								<NewTransaction />

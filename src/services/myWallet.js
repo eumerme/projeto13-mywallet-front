@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const urlBase = `${process.env.REACT_APP_API_BASE_URL}`;
 
 function createHeaders() {
-	const auth = JSON.parse(localStorage.getItem('mywallet'));
+	const auth = JSON.parse(localStorage.getItem("mywallet"));
 
 	if (auth) {
 		const config = {
@@ -20,12 +20,6 @@ function signup(body) {
 	return promise;
 }
 
-function login(body) {
-	const config = createHeaders();
-	const promise = axios.post(`${urlBase}/login`, body, config);
-	return promise;
-}
-
 function getTransactions(token) {
 	const config = createHeaders();
 	const promise = axios.get(`${urlBase}/transactions`, config);
@@ -38,13 +32,9 @@ function createTransaction(body) {
 	return promise;
 }
 
-function deleteTransaction(transactionId) {
-	const config = {
-		headers: {
-			User: transactionId,
-		},
-	};
-	const promise = axios.delete(`${urlBase}/transactions`, config);
+function deleteTransaction(id) {
+	const config = createHeaders();
+	const promise = axios.delete(`${urlBase}/transactions/${id}`, config);
 	return promise;
 }
 
@@ -54,11 +44,4 @@ function logout() {
 	return promise;
 }
 
-export {
-	signup,
-	login,
-	getTransactions,
-	createTransaction,
-	deleteTransaction,
-	logout,
-};
+export { signup, getTransactions, createTransaction, deleteTransaction, logout };
