@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
 	width: 100vw;
@@ -6,8 +6,7 @@ const Wrapper = styled.div`
 	padding: 0 24px;
 	display: flex;
 	flex-direction: column;
-	justify-content: ${(props) =>
-		props.transaction ? 'flex-start' : 'space-between'};
+	justify-content: ${(props) => (props.transaction ? "flex-start" : "space-between")};
 	align-items: center;
 `;
 
@@ -28,7 +27,7 @@ const Top = styled.div`
 	div {
 		width: auto;
 		height: auto;
-		font-size: ${(props) => (props.transaction ? '20px' : '30px')};
+		font-size: ${(props) => (props.transaction ? "20px" : "30px")};
 		color: #ffffff;
 	}
 `;
@@ -95,7 +94,7 @@ const Value = styled.h4`
 	font-size: 16px;
 	padding: 2px;
 	margin-right: 8px;
-	color: ${(props) => (props.credit ? '#03AC00' : '#C70000')};
+	color: ${(props) => (props.credit ? "#03AC00" : "#C70000")};
 `;
 
 const BankBalance = styled.div`
@@ -127,7 +126,7 @@ const BBalance = styled.h3`
 	height: auto;
 	font-size: 17px;
 	padding: 2px;
-	color: ${(props) => (props.total > 0 ? '#03AC00' : '#C70000')};
+	color: ${(props) => (props.total > 0 ? "#03AC00" : "#C70000")};
 `;
 
 const Footer = styled.div`
@@ -169,15 +168,4 @@ const Icons = styled.div`
 	color: #ffffff;
 `;
 
-export {
-	Wrapper,
-	Top,
-	Main,
-	Footer,
-	Registry,
-	BankStatement,
-	BankBalance,
-	Value,
-	BBalance,
-	Icons,
-};
+export { Wrapper, Top, Main, Footer, Registry, BankStatement, BankBalance, Value, BBalance, Icons };

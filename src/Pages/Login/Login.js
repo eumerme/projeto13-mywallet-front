@@ -1,7 +1,7 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Wrapper } from "../../components/authStyled";
+import { Wrapper } from "../../components/Auth/AuthStyled";
 import { ThreeDots } from "react-loader-spinner";
-import { Form } from "../../components/authStyled.js";
+import { Form } from "../../components/Auth/AuthStyled.js";
 import { useHandleInputs, useLogin } from "../../hooks/index";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";

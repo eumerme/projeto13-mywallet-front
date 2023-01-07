@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Wrapper } from "../../components/authStyled";
+import { Form, Wrapper } from "../../components/Auth/AuthStyled";
 import { ThreeDots } from "react-loader-spinner";
 import { useHandleInputs } from "../../hooks";
 import { useSignup } from "../../hooks/api/useSigup";

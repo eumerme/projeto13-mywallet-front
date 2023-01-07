@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createTransaction } from "../../../services/myWallet";
 import { Top, Wrapper } from "../styles/styles";
-import { Form } from "../../authStyled";
+import { Form } from "../../Auth/AuthStyled";
 import { ThreeDots } from "react-loader-spinner";
 import { MdArrowBackIos } from "react-icons/md";
 

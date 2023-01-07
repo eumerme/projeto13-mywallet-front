@@ -1,5 +1,5 @@
-import { Value } from "../styles/styles";
-import { deleteTransaction } from "../../../services/myWallet.js";
+import { Value } from "../../components/PrivatePages/styles/styles";
+import { deleteTransaction } from "../../services/myWallet";
 
 function DeleteTransaction({ transactionId, setReload, reload }) {
 	const handleDeleteTransaction = () => {

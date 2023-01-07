@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getTransactions } from "../../../services/myWallet";
-import { BiExit, BiMinusCircle, BiPlusCircle } from "react-icons/bi";
+import { getTransactions } from "../../services/myWallet";
 import { ThreeDots } from "react-loader-spinner";
-import userLogout from "../UserLogout/UserLogout.js";
 import Transactions from "./Transactions.js";
-import { Wrapper, Top, Main, Footer, Registry, BankStatement, BankBalance, BBalance, Icons } from "../styles/styles";
+import { Wrapper, Main, BankStatement, BankBalance, BBalance } from "../../components/PrivatePages/styles/styles";
+import { HeaderHome, Footer } from "../../components/Home";
 
-export default function Home() {
-	const navigate = useNavigate();
+export function Home() {
 	const { name, email } = JSON.parse(localStorage.getItem("mywallet"));
 	const [transactions, setTransactions] = useState([]);
 	const [update, setUpdate] = useState(null);
@@ -46,16 +43,7 @@ export default function Home() {
 
 	return (
 		<Wrapper>
-			<Top>
-				<h1>{`Olá, ${name}`}</h1>
-				<div>
-					<BiExit
-						onClick={() => {
-							userLogout();
-						}}
-					/>
-				</div>
-			</Top>
+			<HeaderHome name={name} />
 			<Main>
 				{!update ? (
 					<ThreeDots color="#a328d6" height={60} width={60} />
@@ -79,34 +67,7 @@ export default function Home() {
 					</>
 				)}
 			</Main>
-			<Footer>
-				<Registry
-					onClick={() => {
-						navigate("/transaction", {
-							replace: false,
-							state: { type: "credit", email },
-						});
-					}}
-				>
-					<Icons>
-						<BiPlusCircle />
-					</Icons>
-					<h2>{"Nova entrada"}</h2>
-				</Registry>
-				<Registry
-					onClick={() => {
-						navigate("/transaction", {
-							replace: false,
-							state: { type: "debit", email },
-						});
-					}}
-				>
-					<Icons>
-						<BiMinusCircle />
-					</Icons>
-					<h2>{"Nova saída"}</h2>
-				</Registry>
-			</Footer>
+			<Footer email={email} />
 		</Wrapper>
 	);
 }
