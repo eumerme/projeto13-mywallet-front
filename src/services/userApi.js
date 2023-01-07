@@ -2,7 +2,7 @@ import { api, createHeaders } from "./api";
 
 async function signup(body) {
 	const response = await api.post("/signup", body);
-	return response;
+	return response.data;
 }
 
 async function login(body) {

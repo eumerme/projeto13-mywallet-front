@@ -1,7 +1,7 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Wrapper } from "../../components/PublicPages/styles/styles";
+import { Wrapper } from "../../components/authStyled";
 import { ThreeDots } from "react-loader-spinner";
-import { Form } from "../../components/PublicPages/styles/styles.js";
+import { Form } from "../../components/authStyled.js";
 import { useHandleInputs, useLogin } from "../../hooks/index";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
@@ -9,7 +9,6 @@ import { UserContext } from "../../contexts/UserContext";
 export function Login() {
 	const navigate = useNavigate();
 	const { userData, setUserData } = useContext(UserContext);
-
 	const { inputValue, handleInputs } = useHandleInputs();
 	const { login, loginLoading } = useLogin();
 
@@ -17,11 +16,12 @@ export function Login() {
 		e.preventDefault();
 
 		try {
-			const userData = await login({ ...inputValue });
+			const data = await login({ ...inputValue });
+			console.log({ data });
 			setUserData({
-				name: userData.name,
-				token: userData.token,
-				email: userData.email,
+				name: data.name,
+				token: data.token,
+				email: data.email,
 			});
 			navigate("/home");
 		} catch (error) {
@@ -29,6 +29,8 @@ export function Login() {
 			console.log(error);
 		}
 	};
+
+	console.log({ inputValue, userData });
 
 	return (
 		<>

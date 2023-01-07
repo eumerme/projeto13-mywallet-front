@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
 	width: 100vw;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 	align-items: center;
 
 	h1 {
-		font-family: 'Saira Stencil One', cursive;
+		font-family: "Saira Stencil One", cursive;
 		font-size: 32px;
 		color: #ffffff;
 		margin-bottom: 18px;
