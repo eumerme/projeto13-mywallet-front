@@ -2,11 +2,11 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Wrapper } from "../../components/PublicPages/styles/styles";
 import { ThreeDots } from "react-loader-spinner";
 import { Form } from "../../components/PublicPages/styles/styles.js";
-import { useHandleInputs, useLogin } from "../../hooks/index";
+import { useHandleInputs, useLocalStorage, useLogin } from "../../hooks/index";
 
 export function Login() {
 	const navigate = useNavigate();
-	const auth = JSON.parse(localStorage.getItem("mywallet"));
+	const [storedValue, setStoredValue] = useLocalStorage("mywallet", {});
 	const { inputValue, handleInputs } = useHandleInputs();
 	const { login, loginLoading } = useLogin();
 
@@ -15,24 +15,21 @@ export function Login() {
 
 		try {
 			const userData = await login({ ...inputValue });
-			console.log({ userData, inputValue });
-			localStorage.setItem(
-				"mywallet",
-				JSON.stringify({
-					name: userData.name,
-					token: userData.token,
-					email: userData.email,
-				})
-			);
+			setStoredValue({
+				name: userData.name,
+				token: userData.token,
+				email: userData.email,
+			});
 			navigate("/home");
 		} catch (error) {
+			//TODO: colocar um substituto pro toast
 			console.log(error);
 		}
 	};
 
 	return (
 		<>
-			{auth ? (
+			{storedValue.token ? (
 				<Navigate to="/home" />
 			) : (
 				<Wrapper>
