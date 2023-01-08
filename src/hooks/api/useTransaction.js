@@ -6,11 +6,13 @@ export function useTransaction() {
 		data: transactions,
 		loading: transactionsLoading,
 		error: transactionsError,
+		act: getTransactions,
 	} = useAsync(() => transactionsApi.getTransactions());
 
 	return {
 		transactions,
 		transactionsLoading,
 		transactionsError,
+		getTransactions,
 	};
 }
