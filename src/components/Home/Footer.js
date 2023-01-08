@@ -52,7 +52,7 @@ const Registry = styled.div`
 	padding: 10px;
 	background-color: #a328d6;
 
-	h2 {
+	> h2 {
 		width: 44px;
 		height: auto;
 		font-size: 17px;

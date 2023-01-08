@@ -13,7 +13,7 @@ const Main = styled.div`
 	background-color: #ffffff;
 	position: relative;
 
-	h2 {
+	> h2 {
 		width: 180px;
 		height: auto;
 		text-align: center;

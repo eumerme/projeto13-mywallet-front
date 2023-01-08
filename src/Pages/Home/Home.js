@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { Transactions } from "../../components/Transactions";
 import { Header, Main, Footer } from "../../components/Home";
-import { useTransaction } from "../../hooks/api/useTransaction";
+import { useTransaction, valueFormater } from "../../hooks";
 import { UserContext } from "../../contexts/UserContext";
 import { Wrapper } from "../../components/Wrapper.js";
 
@@ -14,27 +14,28 @@ export function Home() {
 	const [bankBalance, setBankBalance] = useState("");
 
 	const calculateBankBalance = () => {
+		console.log("chamou 1");
+		if (!transactions) return;
+		console.log("chamou 2");
+
 		const value = transactions
 			.map((transaction) =>
 				transaction.type === "credit" ? Number(transaction.value) : Number(transaction.value) * -1
 			)
 			.reduce((total, value) => total + value, 0);
 
-		const valueFormated = (value / 100)
-			.toLocaleString("pt-br", {
-				style: "currency",
-				currency: "BRL",
-			})
-			.substring(3);
+		const valueFormated = valueFormater(value);
 
 		setTotal(value);
 		setBankBalance(valueFormated);
 	};
 
 	useEffect(() => {
-		if (transactions) calculateBankBalance();
+		calculateBankBalance();
 		// eslint-disable-next-line
-	}, [transactions, reload]);
+	}, [reload]);
+
+	console.log({ reload, total, bankBalance });
 
 	return (
 		<Wrapper>

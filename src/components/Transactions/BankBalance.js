@@ -14,7 +14,7 @@ const BankBalance = styled.div`
 	background-color: #ffffff;
 	z-index: 1;
 
-	h2 {
+	> h2 {
 		width: auto;
 		height: auto;
 		font-size: 17px;

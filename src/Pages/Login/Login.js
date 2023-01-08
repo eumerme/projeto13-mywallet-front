@@ -1,8 +1,8 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Wrapper } from "../../components/Auth";
 import { ThreeDots } from "react-loader-spinner";
-import { Form } from "../../components/Auth/index.js";
-import { useHandleInputs, useLogin } from "../../hooks/index";
+import { Form } from "../../components/Auth";
+import { useHandleInputs, useLogin } from "../../hooks";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 

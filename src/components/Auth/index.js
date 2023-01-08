@@ -9,14 +9,14 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	h1 {
+	> h1 {
 		font-family: "Saira Stencil One", cursive;
 		font-size: 32px;
 		color: #ffffff;
 		margin-bottom: 18px;
 	}
 
-	p {
+	> p {
 		font-size: 15px;
 		font-weight: 700;
 		color: #ffffff;
@@ -31,7 +31,7 @@ const Form = styled.form`
 	flex-direction: column;
 	margin-top: 10px;
 
-	input {
+	> input {
 		width: 100%;
 		height: 58px;
 		font-size: 20px;
@@ -42,12 +42,12 @@ const Form = styled.form`
 		margin-bottom: 13px;
 	}
 
-	input::placeholder {
+	> input::placeholder {
 		font-size: 20px;
 		color: #000000;
 	}
 
-	button {
+	> button {
 		width: 100%;
 		height: 46px;
 		font-size: 20px;

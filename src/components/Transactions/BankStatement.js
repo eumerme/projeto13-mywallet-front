@@ -16,7 +16,7 @@ const Content = styled.div`
 	align-items: center;
 	margin: 5px 0;
 
-	h2 {
+	> h2 {
 		width: auto;
 		height: auto;
 		font-size: 16px;
@@ -24,7 +24,7 @@ const Content = styled.div`
 		color: #c6c6c6;
 	}
 
-	h3 {
+	> h3 {
 		width: 100%;
 		height: auto;
 		font-size: 16px;

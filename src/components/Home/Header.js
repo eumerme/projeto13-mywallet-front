@@ -8,11 +8,7 @@ export function Header({ name }) {
 		<TopContent>
 			<H1>{`Olá, ${name}`}</H1>
 			<Logout>
-				<BiExit
-					onClick={() => {
-						userLogout();
-					}}
-				/>
+				<BiExit onClick={() => userLogout()} />
 			</Logout>
 		</TopContent>
 	);
@@ -21,6 +17,6 @@ export function Header({ name }) {
 const Logout = styled.div`
 	width: auto;
 	height: auto;
-	font-size: ${(props) => (props.transaction ? "20px" : "30px")};
+	font-size: ${({ transaction }) => (transaction ? "20px" : "30px")};
 	color: #ffffff;
 `;
