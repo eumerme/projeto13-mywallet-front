@@ -1,22 +1,24 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
 	width: 100vw;
+	max-width: 1024px;
 	height: 100vh;
 	padding: 0 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin: 0 auto;
 
-	h1 {
-		font-family: 'Saira Stencil One', cursive;
+	> h1 {
+		font-family: "Saira Stencil One", cursive;
 		font-size: 32px;
 		color: #ffffff;
 		margin-bottom: 18px;
 	}
 
-	p {
+	> a {
 		font-size: 15px;
 		font-weight: 700;
 		color: #ffffff;
@@ -31,7 +33,7 @@ const Form = styled.form`
 	flex-direction: column;
 	margin-top: 10px;
 
-	input {
+	> input {
 		width: 100%;
 		height: 58px;
 		font-size: 20px;
@@ -40,14 +42,14 @@ const Form = styled.form`
 		outline: none;
 		padding: 0 15px;
 		margin-bottom: 13px;
+
+		&::placeholder {
+			font-size: 17px;
+			color: #868686;
+		}
 	}
 
-	input::placeholder {
-		font-size: 20px;
-		color: #000000;
-	}
-
-	button {
+	> button {
 		width: 100%;
 		height: 46px;
 		font-size: 20px;
@@ -59,6 +61,7 @@ const Form = styled.form`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		cursor: pointer;
 	}
 `;
 
