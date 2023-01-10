@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { deleteTransaction } from "../../services/myWallet";
+import { useDeleteTransaction } from "../../hooks";
 import { Content, BankStatement, BankBalance, Total, Value } from "./index";
 
-export function Transactions({ transactions, getTransactions }) {
+export function HomeContent({ transactions, getTransactions }) {
 	const [total, setTotal] = useState(0);
 	const [bankBalance, setBankBalance] = useState("");
+	const { deleteTransaction } = useDeleteTransaction();
 
 	const calculateBankBalance = () => {
 		const amount = transactions
@@ -33,7 +34,7 @@ export function Transactions({ transactions, getTransactions }) {
 						<h2>{transaction.date}</h2>
 						<h3>{transaction.description}</h3>
 						<Value type={transaction.type}>{valueFormater(transaction.value)}</Value>
-						<h2 onClick={() => handleDeleteTransaction(getTransactions, transaction._id)}>X</h2>
+						<h2 onClick={() => handleDeleteTransaction(getTransactions, deleteTransaction, transaction._id)}>X</h2>
 					</Content>
 				))}
 			</BankStatement>
@@ -54,10 +55,14 @@ function valueFormater(value) {
 		.substring(3);
 }
 
-function handleDeleteTransaction(getTransactions, transactionId) {
+async function handleDeleteTransaction(getTransactions, deleteTransaction, transactionId) {
 	const confirm = window.confirm("Gostaria de apagar esse item?");
 	if (!confirm) return;
 
-	const promise = deleteTransaction(transactionId);
-	promise.then((res) => getTransactions()).catch((error) => console.error(error));
+	try {
+		await deleteTransaction(transactionId);
+		await getTransactions();
+	} catch (error) {
+		console.error(error);
+	}
 }

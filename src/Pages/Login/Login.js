@@ -17,7 +17,6 @@ export function Login() {
 
 		try {
 			const data = await login({ ...inputValue });
-			console.log({ data });
 			setUserData({
 				name: data.name,
 				token: data.token,
@@ -29,8 +28,6 @@ export function Login() {
 			console.log(error);
 		}
 	};
-
-	console.log({ inputValue, userData });
 
 	return (
 		<>
