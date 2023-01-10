@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyle/GlobalStyle";
-import NewTransaction from "./components/PrivatePages/NewTransaction/NewTransaction";
 import Private from "./components/PrivatePages/Private";
-import { Login, Signup, Home } from "./Pages/index.js";
+import { Login, Signup, Home, NewTransaction } from "./Pages/index.js";
 import { UserProvider } from "./contexts/UserContext";
 
 export default function App() {

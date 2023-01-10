@@ -43,8 +43,8 @@ const Form = styled.form`
 	}
 
 	> input::placeholder {
-		font-size: 20px;
-		color: #000000;
+		font-size: 17px;
+		color: #868686;
 	}
 
 	> button {
