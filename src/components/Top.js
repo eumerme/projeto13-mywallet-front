@@ -7,6 +7,7 @@ const TopContent = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	font-size: ${({ transaction }) => (transaction ? "20px" : "30px")};
 `;
 
 const H1 = styled.h1`
