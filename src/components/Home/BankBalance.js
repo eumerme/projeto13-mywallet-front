@@ -29,7 +29,7 @@ const Total = styled.h3`
 	height: auto;
 	font-size: 17px;
 	padding: 2px;
-	color: ${({ total }) => (total > 0 ? "#03AC00" : "#C70000")};
+	color: ${({ total }) => (total >= 0 ? "#03AC00" : "#C70000")};
 `;
 
 export { BankBalance, Total };

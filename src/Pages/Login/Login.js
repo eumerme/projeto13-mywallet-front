@@ -5,6 +5,7 @@ import { Form } from "../../components/Auth";
 import { useHandleInputs, useLogin } from "../../hooks";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { toast } from "react-hot-toast";
 
 export function Login() {
 	const navigate = useNavigate();
@@ -22,10 +23,10 @@ export function Login() {
 				token: data.token,
 				email: data.email,
 			});
+			toast.success("Login feito com sucesso");
 			navigate("/home");
 		} catch (error) {
-			//TODO: colocar um substituto pro toast
-			console.log(error);
+			toast.error("Não foi possível fazer o login");
 		}
 	};
 
@@ -59,9 +60,7 @@ export function Login() {
 							{!loginLoading ? "Entrar" : <ThreeDots color="#ffffff" height={13} width={51} />}
 						</button>
 					</Form>
-					<Link to="/signup">
-						<p>Primeira vez? Cadastre-se!</p>
-					</Link>
+					<Link to="/signup">Primeira vez? Cadastre-se!</Link>
 				</Wrapper>
 			)}
 		</>

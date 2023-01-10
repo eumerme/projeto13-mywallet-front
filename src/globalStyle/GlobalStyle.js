@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -53,11 +53,12 @@ table {
 	border-spacing: 0;
 }
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 a {
 	color: inherit;
 	text-decoration: inherit;
+	cursor: pointer;
 }
 `;
 

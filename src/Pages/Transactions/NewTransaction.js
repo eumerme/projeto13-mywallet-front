@@ -6,6 +6,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { Wrapper } from "../../components/Wrapper";
 import { H1, TopContent } from "../../components/Top";
 import { useHandleInputs, useSaveTransaction } from "../../hooks";
+import { toast } from "react-hot-toast";
 
 export function NewTransaction() {
 	const { state } = useLocation();
@@ -24,16 +25,17 @@ export function NewTransaction() {
 				type: state.type,
 				date: dayjs().format("DD/MM"),
 			});
+			toast.success("Transação cadastrada com sucesso");
 			navigate("/home");
 		} catch (error) {
-			console.log(error);
+			toast.error("Não foi possível cadastrar a transação");
 		}
 	};
 
 	return (
 		<Wrapper transaction>
 			<TopContent transaction>
-				<MdArrowBackIos onClick={() => navigate("/home")} style={{ color: "#ffffff" }} />
+				<MdArrowBackIos onClick={() => navigate("/home")} style={{ color: "#ffffff", cursor: "pointer" }} />
 				{state.type === "credit" && <H1>Nova entrada</H1>}
 				{state.type === "debit" && <H1>Nova saída</H1>}
 			</TopContent>

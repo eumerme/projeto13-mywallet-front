@@ -51,6 +51,7 @@ const Registry = styled.div`
 	border-radius: 5px;
 	padding: 10px;
 	background-color: #a328d6;
+	cursor: pointer;
 
 	> h2 {
 		width: 44px;

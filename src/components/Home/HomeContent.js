@@ -34,7 +34,7 @@ export function HomeContent({ transactions, getTransactions }) {
 						<h2>{transaction.date}</h2>
 						<h3>{transaction.description}</h3>
 						<Value type={transaction.type}>{valueFormater(transaction.value)}</Value>
-						<h2 onClick={() => handleDeleteTransaction(getTransactions, deleteTransaction, transaction._id)}>X</h2>
+						<h5 onClick={() => handleDeleteTransaction(getTransactions, deleteTransaction, transaction._id)}>X</h5>
 					</Content>
 				))}
 			</BankStatement>

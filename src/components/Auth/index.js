@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
 	width: 100vw;
+	max-width: 1024px;
 	height: 100vh;
 	padding: 0 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin: 0 auto;
 
 	> h1 {
 		font-family: "Saira Stencil One", cursive;
@@ -16,7 +18,7 @@ const Wrapper = styled.div`
 		margin-bottom: 18px;
 	}
 
-	> p {
+	> a {
 		font-size: 15px;
 		font-weight: 700;
 		color: #ffffff;
@@ -40,11 +42,11 @@ const Form = styled.form`
 		outline: none;
 		padding: 0 15px;
 		margin-bottom: 13px;
-	}
 
-	> input::placeholder {
-		font-size: 17px;
-		color: #868686;
+		&::placeholder {
+			font-size: 17px;
+			color: #868686;
+		}
 	}
 
 	> button {
@@ -59,6 +61,7 @@ const Form = styled.form`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		cursor: pointer;
 	}
 `;
 

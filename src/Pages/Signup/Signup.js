@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Wrapper } from "../../components/Auth";
 import { ThreeDots } from "react-loader-spinner";
 import { useSignup, useHandleInputs } from "../../hooks";
+import { toast } from "react-hot-toast";
 
 export function Signup() {
 	const navigate = useNavigate();
@@ -11,12 +12,16 @@ export function Signup() {
 	const submit = async (e) => {
 		e.preventDefault();
 
+		if (inputValue.password !== inputValue.confirmPassword) {
+			return toast.error("As senhas devem ser iguais");
+		}
+
 		try {
 			await signup({ ...inputValue });
+			toast.success("Cadastro feito com sucesso");
 			navigate("/");
 		} catch (error) {
-			//TODO: colocar um substituto pro toast
-			console.log(error);
+			toast.error("Não foi possível concluir o cadastro");
 		}
 	};
 
@@ -64,9 +69,7 @@ export function Signup() {
 					{!signupLoading ? "Cadastrar" : <ThreeDots color="#ffffff" height={13} width={51} />}
 				</button>
 			</Form>
-			<Link to="/">
-				<p>Já tem uma conta? Entre agora!</p>
-			</Link>
+			<Link to="/">Já tem uma conta? Entre agora!</Link>
 		</Wrapper>
 	);
 }

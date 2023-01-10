@@ -6,6 +6,12 @@ const BankStatement = styled.div`
 	border-radius: 5px;
 	overflow-y: scroll;
 	margin-bottom: 47px;
+
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 `;
 
 const Content = styled.div`
@@ -16,12 +22,17 @@ const Content = styled.div`
 	align-items: center;
 	margin: 5px 0;
 
-	> h2 {
+	> h2,
+	h5 {
 		width: auto;
 		height: auto;
 		font-size: 16px;
-		padding: 2px;
+		padding: 2px 7px;
 		color: #c6c6c6;
+	}
+
+	> h5 {
+		cursor: pointer;
 	}
 
 	> h3 {
