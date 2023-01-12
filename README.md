@@ -2,6 +2,8 @@
 
 MyWallet fronted, a simple app for financial control.
 
+<video src="./public/assets/mywallet.mp4" autoPlay loop muted></video>
+
 Try it out now at https://mywallet-eumerme.vercel.app/
 
 # About
