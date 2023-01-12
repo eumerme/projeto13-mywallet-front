@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# projeto13-mywallet-front
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MyWallet fronted, a simple app for financial control.
 
-## Available Scripts
+Try it out now at https://mywallet-eumerme.vercel.app/
 
-In the project directory, you can run:
+# About
 
-### `npm start`
+This project is a simple finance manager in which you can register earnings and expenses. You will always be up on of your bank balance, ensuring greater control over your financial life.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# How to run
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Clone this repository
+- Run `npm i` to installl dependencies
+- Create a `.env` file as in `.env.example` file
+- Run `npm start` to start the local server
 
-### `npm test`
+# API endpoints
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `POST /signup`
 
-### `npm run build`
+- Request:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```json
+{
+	"name": "Seu nome",
+	"email": "Seu email",
+	"password": "Sua senha",
+	"confirmPassword": "Sua senha"
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Response: 201 Created
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `POST /login`
 
-### `npm run eject`
+- Request:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```json
+{
+	"email": "Seu email",
+	"password": "Sua senha"
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Response: 200 Ok
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `POST /logout`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Response: 200 Ok
 
-## Learn More
+### `POST /transactions`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Request:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```json
+{
+	"email": "Seu email",
+	"value": 1290,
+	"description": "Almoço",
+	"type": "credit",
+	"date": "07/01"
+}
+```
 
-### Code Splitting
+- Response: 201 Created
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `GET /transactions`
 
-### Analyzing the Bundle Size
+- Response: 200 Ok
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```json
+{
+	"_id" : ObjectId("63bd75c68c24f6235192c091"),
+	"email": "Seu email",
+	"value": 1290,
+	"description": "Almoço",
+	"type": "credit",
+	"date": "07/01"
+}
+```
 
-### Making a Progressive Web App
+### `DELETE /transactions/:id`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Response: 200 Ok
