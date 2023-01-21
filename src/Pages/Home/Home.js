@@ -16,7 +16,7 @@ export function Home() {
 				{transactionsLoading && <ThreeDots color="#a328d6" height={60} width={60} />}
 				{!transactionsLoading && transactions?.length === 0 && <h2>Não há registros de entrada ou saída</h2>}
 				{!transactionsLoading && transactions?.length !== 0 && (
-					<HomeContent transactions={transactions} getTransactions={getTransactions} />
+					<HomeContent transactions={transactions} getTransactions={getTransactions} email={userData.email} />
 				)}
 			</Main>
 			<Footer email={userData.email} />

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export function Footer({ email }) {
 	const navigate = useNavigate();
 
-	const redirect = (type, email) => {
+	const redirect = (type) => {
 		return navigate("/transaction", {
 			replace: false,
 			state: { type, email },
@@ -14,13 +14,13 @@ export function Footer({ email }) {
 
 	return (
 		<Content>
-			<Registry onClick={() => redirect("credit", email)}>
+			<Registry onClick={() => redirect("credit")}>
 				<Icons>
 					<BiPlusCircle />
 				</Icons>
 				<h2>Nova entrada</h2>
 			</Registry>
-			<Registry onClick={() => redirect("debit", email)}>
+			<Registry onClick={() => redirect("debit")}>
 				<Icons>
 					<BiMinusCircle />
 				</Icons>

@@ -12,10 +12,16 @@ async function createTransaction(body) {
 	return response;
 }
 
+async function updateTransaction({ id, body }) {
+	const headers = createHeaders();
+	const response = await api.patch(`/transactions/${id}`, body, headers);
+	return response;
+}
+
 async function deleteTransaction(id) {
 	const headers = createHeaders();
 	const response = await api.delete(`/transactions/${id}`, headers);
 	return response;
 }
 
-export const transactionsApi = { getTransactions, createTransaction, deleteTransaction };
+export const transactionsApi = { getTransactions, createTransaction, updateTransaction, deleteTransaction };

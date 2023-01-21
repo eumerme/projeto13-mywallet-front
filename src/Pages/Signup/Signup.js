@@ -18,7 +18,7 @@ export function Signup() {
 
 		try {
 			await signup({ ...inputValue });
-			toast.success("Cadastro feito com sucesso");
+			toast.success("Cadastro feito com sucesso"); //TODO: trocar toast quando o erro é 409 e 422
 			navigate("/");
 		} catch (error) {
 			toast.error("Não foi possível concluir o cadastro");

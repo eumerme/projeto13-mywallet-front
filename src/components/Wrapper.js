@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: ${(props) => (props.transaction ? "flex-start" : "space-between")};
+	justify-content: ${({ transaction }) => (transaction ? "flex-start" : "space-between")};
 	align-items: center;
 `;
 
