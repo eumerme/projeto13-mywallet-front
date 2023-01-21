@@ -15,53 +15,44 @@ export function Transaction() {
 	const navigate = useNavigate();
 	const { inputValue, handleInputs, setInputValue } = useHandleInputs();
 	const { saveTransaction, saveTransactionLoading } = useSaveTransaction();
-	const { updateTransaction, updateTransactionLoading, updateTransactionError } = useUpdateTransaction();
+	const { updateTransaction, updateTransactionLoading } = useUpdateTransaction();
 
-	const submitNew = async (e) => {
+	const submit = async (e) => {
 		e.preventDefault();
 
 		const valueFormated = inputValue.value.replace(",", "").replaceAll(".", "");
 
 		try {
-			await saveTransaction({
-				email: state.email,
-				description: inputValue.description,
-				type: state.type,
-				value: Number(valueFormated),
-				date: dayjs().format("DD/MM"),
-			});
-			toast.success("Transação cadastrada com sucesso");
-			navigate("/home");
-		} catch (error) {
-			toast.error("Não foi possível cadastrar a transação");
-		}
-	};
-
-	const submitUpdate = async (e) => {
-		e.preventDefault();
-
-		const valueFormated = inputValue.value.replace(",", "").replaceAll(".", "");
-
-		try {
-			await updateTransaction({
-				id: state.id,
-				body: {
+			if (state.type === "edit") {
+				await updateTransaction({
+					id: state.id,
+					body: {
+						description: inputValue.description,
+						value: Number(valueFormated),
+						date: dayjs().format("DD/MM"),
+					},
+				});
+				toast.success("Transação editada com sucesso");
+			} else {
+				await saveTransaction({
+					email: state.email,
 					description: inputValue.description,
+					type: state.type,
 					value: Number(valueFormated),
 					date: dayjs().format("DD/MM"),
-				},
-			});
-			toast.success("Transação editada com sucesso");
+				});
+				toast.success("Transação cadastrada com sucesso");
+			}
+
 			navigate("/home");
 		} catch (error) {
-			toast.error("Não foi possível editar a transação");
+			toast.error("Não foi possível concluir a operação");
 		}
 	};
-
-	console.log(updateTransactionError);
 
 	useEffect(() => {
 		if (state.type === "edit") setInputValue({ description: state.description, value: state.value });
+		// eslint-disable-next-line
 	}, []);
 
 	return (
@@ -72,7 +63,7 @@ export function Transaction() {
 				{state.type === "debit" && <H1>Nova saída</H1>}
 				{state.type === "edit" && <H1>Editar Transação</H1>}
 			</TopContent>
-			<Form onSubmit={state.type === "edit" ? submitUpdate : submitNew}>
+			<Form onSubmit={submit}>
 				<input
 					type="text"
 					pattern="([0-9]{1,3}\.)*?[0-9]{1,3},[0-9]{2}"
