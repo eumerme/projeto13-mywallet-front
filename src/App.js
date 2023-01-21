@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import GlobalStyle from "./globalStyle/GlobalStyle";
 import { Private } from "./components/Private/Private";
-import { Login, Signup, Home, NewTransaction } from "./Pages/index.js";
+import { Login, Signup, Home, Transaction } from "./Pages/index.js";
 import { UserProvider } from "./contexts/UserContext";
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
 							path="/transaction"
 							element={
 								<Private>
-									<NewTransaction />
+									<Transaction />
 								</Private>
 							}
 						/>

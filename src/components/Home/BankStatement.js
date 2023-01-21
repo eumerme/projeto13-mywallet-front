@@ -16,10 +16,10 @@ const BankStatement = styled.div`
 
 const Content = styled.div`
 	width: 100%;
-	height: 30px;
+	min-height: 30px;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 	margin: 5px 0;
 
 	> h2,
@@ -31,7 +31,8 @@ const Content = styled.div`
 		color: #c6c6c6;
 	}
 
-	> h5 {
+	> h5,
+	h3 {
 		cursor: pointer;
 	}
 
@@ -42,6 +43,7 @@ const Content = styled.div`
 		padding: 0 10px;
 		color: #000000;
 		word-break: break-all;
+		word-wrap: break-word;
 	}
 `;
 

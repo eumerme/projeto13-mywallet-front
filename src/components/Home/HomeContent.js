@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDeleteTransaction } from "../../hooks";
 import { Content, BankStatement, BankBalance, Total, Value } from "./index";
 
-export function HomeContent({ transactions, getTransactions }) {
+export function HomeContent({ transactions, getTransactions, email }) {
+	const navigate = useNavigate();
 	const [total, setTotal] = useState(0);
 	const [bankBalance, setBankBalance] = useState("");
 	const { deleteTransaction } = useDeleteTransaction();
@@ -26,13 +28,26 @@ export function HomeContent({ transactions, getTransactions }) {
 		// eslint-disable-next-line
 	}, [transactions]);
 
+	const redirect = (type, description, value, id) => {
+		return navigate("/transaction", {
+			replace: false,
+			state: { type, email, description, value, id },
+		});
+	};
+
 	return (
 		<>
 			<BankStatement>
 				{transactions?.map((transaction, index) => (
 					<Content key={transaction._id}>
 						<h2>{transaction.date}</h2>
-						<h3>{transaction.description}</h3>
+						<h3
+							onClick={() =>
+								redirect("edit", transaction.description, valueFormater(transaction.value), transaction._id)
+							}
+						>
+							{transaction.description}
+						</h3>
 						<Value type={transaction.type}>{valueFormater(transaction.value)}</Value>
 						<h5 onClick={() => handleDeleteTransaction(getTransactions, deleteTransaction, transaction._id)}>X</h5>
 					</Content>
